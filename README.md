@@ -66,7 +66,7 @@ To evaluate the first stage of the algorithm execute:
 python eval.py --experiment_name <experiment_name> --dataset_name <dataset_name>  --K <K> --stage 1
 ```
 
-The last checkpoint stored on _Results/\<experiment\_name\>/CheckPoints/_  will be loaded automatically. TO you want to evaluate a particular checkpoint or pretrained model use the `path_to_checkpoint` argument.
+The last checkpoint stored on ```_Results/\<experiment\_name\>/CheckPoints/_```  will be loaded automatically. TO you want to evaluate a particular checkpoint or pretrained model use the `path_to_checkpoint` argument.
 
 ### Stage 2
 
@@ -76,7 +76,7 @@ Similarly, to To evaluate the second stage of the algorithm execute:
 python eval.py --experiment_name <experiment_name> --dataset_name <dataset_name>  --K <K> --stage 2
 ```
 
-Cumulative forward and backward error curves will be stored in _Results/\<experiment\_name\>/Logs/_ .
+Cumulative forward and backward error curves will be stored in ```_Results/\<experiment\_name\>/Logs/_``` .
 
 
 

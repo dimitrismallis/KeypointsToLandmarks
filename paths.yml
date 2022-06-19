@@ -1,0 +1,2 @@
+CelebA_datapath: <pathToCelebA_database>/celeb/Img/img_align_celeba_hq/
+path_to_superpoint_checkpoint: <pathToSuperPointCheckPoint>/superpoint_v1.pth

@@ -89,9 +89,6 @@ def ShowTrainExamples(keypoints,log_path,experiment_name,dataset_name,metadata,i
         if(pointstoshow.shape[1]==2):
             pointstoshow=np.append(pointstoshow,np.arange(len(pointstoshow)).reshape(-1,1),axis=1)
         ax.scatter(4*pointstoshow[:, 0], 4*pointstoshow[:, 1], s=400, c=np.array(colors)[pointstoshow[:, 2].astype(int)].tolist(), marker='P',edgecolors='black', linewidths=0.3)
-        for j in range(len(pointstoshow)):
-            ax.annotate(str(int(pointstoshow[j, 2])), ((4*pointstoshow[j, 0])-5, (4*pointstoshow[j, 1])-5))
-
     fig.show()
 
     filename=get_logs_path(experiment_name,log_path) / imagefile_name

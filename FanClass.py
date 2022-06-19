@@ -465,43 +465,17 @@ class FAN_Model():
         descriptors_flipped = clustering.preprocess_features(Descriptors_flipped[:numberOfPointsForClustering])
         clusteringDescriptors=np.concatenate((descriptors[:numberOfPointsForClustering],descriptors_flipped[:numberOfPointsForClustering]),axis=0)
 
-        KthCluster_num_of_elements=[]
-        for k in range(self.K,self.K+2):
-            # precompute squared norms of data points
-            x_squared_norms = sklearn.utils.extmath.row_norms(clusteringDescriptors[:50000], squared=True)
-            centroids,_=sklearn.cluster.kmeans_plusplus(clusteringDescriptors[:50000],k,x_squared_norms=x_squared_norms)
-
-            # we use a subset of all the descriptors for clustering based on the recomendation of the Faiss repository
-            centroids=np.array(centroids)
-
-
-            KmeansClustering=clustering.Kmeans(k)
-            I,centroids,distanceToCentroid=KmeansClustering.cluster(clusteringDescriptors[:50000], centroids=centroids,verbose=False)
-
-            KthCluster_num_of_elements.append((k,np.sort(np.unique(I,return_counts=True)[1])[-self.K]))
-
-
-        k=max(KthCluster_num_of_elements,key=lambda item:item[1])[0]
 
 
         x_squared_norms = sklearn.utils.extmath.row_norms(clusteringDescriptors, squared=True)
-        centroids,_=sklearn.cluster.kmeans_plusplus(clusteringDescriptors,k,x_squared_norms=x_squared_norms)
+        centroids,_=sklearn.cluster.kmeans_plusplus(clusteringDescriptors,self.K,x_squared_norms=x_squared_norms)
 
         # we use a subset of all the descriptors for clustering based on the recomendation of the Faiss repository
         centroids=np.array(centroids)
 
-        KmeansClustering=clustering.Kmeans(k)
+        KmeansClustering=clustering.Kmeans(self.K)
         I,centroids,_=KmeansClustering.cluster(clusteringDescriptors, centroids=centroids,verbose=False)
 
-
-        log_text(f"Points per cluster {np.sort(np.unique(I,return_counts=True)[1])}", self.experiment_name, self.log_path)
-        log_text(f"Actual Cluster {len(np.unique(I,return_counts=True)[1])}", self.experiment_name, self.log_path)
-
-        counts=np.unique(I,return_counts=True)
-        bigger_clusters_indeces=np.argsort(counts[1])[-self.K:]
-        recover_indeces=-1*np.ones(k)
-        recover_indeces[bigger_clusters_indeces]=np.arange(self.K)
-        centroids=centroids[bigger_clusters_indeces]
 
         flipppingCorrespondance_inference=np.zeros((self.K,self.K))
 
@@ -518,29 +492,6 @@ class FAN_Model():
 
             image_descriptors_flipped=clustering.preprocess_features(Descriptors_flipped[start:end, :])
             _,clustering_assingments_flipped=KmeansClustering.index.search(image_descriptors_flipped,1)
-
-
-            tokeep_indexes=np.arange(len(detectorkeypoints))
-            image_keypointsToKeep=np.zeros(len(detectorkeypoints))
-
-            x_ind=np.in1d(clustering_assingments[:,0],bigger_clusters_indeces)
-            detectorkeypoints=detectorkeypoints[x_ind]
-            clustering_assingments=clustering_assingments[x_ind]
-            clustering_assingments_flipped=clustering_assingments_flipped[x_ind]
-            keypoint_distanceToCentroid=keypoint_distanceToCentroid[x_ind]
-            tokeep_indexes=tokeep_indexes[x_ind]
-
-            x_ind=np.in1d(clustering_assingments_flipped[:,0],bigger_clusters_indeces)
-            detectorkeypoints=detectorkeypoints[x_ind]
-            clustering_assingments=clustering_assingments[x_ind]
-            clustering_assingments_flipped=clustering_assingments_flipped[x_ind]
-            keypoint_distanceToCentroid=keypoint_distanceToCentroid[x_ind]
-            tokeep_indexes=tokeep_indexes[x_ind]
-
-            clustering_assingments=recover_indeces[clustering_assingments].astype(int)
-            clustering_assingments_flipped=recover_indeces[clustering_assingments_flipped].astype(int)
-            
-
             flipppingCorrespondance_inference[clustering_assingments[:,0],clustering_assingments_flipped[:,0]]+=1
 
             keypoints=np.zeros((len(detectorkeypoints),4))
@@ -548,6 +499,8 @@ class FAN_Model():
             keypoints[:,2]=clustering_assingments[:,0]
             keypoints[:,3]=clustering_assingments_flipped[:,0]
 
+            tokeep_indexes=np.arange(len(keypoints))
+            image_keypointsToKeep=np.zeros(len(keypoints))
 
             sort_indexes=np.argsort(keypoint_distanceToCentroid.reshape(-1))
             keypoints=keypoints[sort_indexes]

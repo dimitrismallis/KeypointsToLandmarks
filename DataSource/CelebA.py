@@ -46,12 +46,6 @@ class CelebA():
         coords = [np.array(l.split()[1::]).reshape(5,2).astype(int) for l in gt_5points]
         self.gt_5points = dict(zip(names,coords))
 
-        # a=[f for f in self.groundtruth.keys() if  isinstance(self.groundtruth[f], np.ndarray)==False]
-        # self.groundtruth[a[0]]=self.groundtruth[a[0]].numpy()
-        # self.groundtruth[a[1]]=self.groundtruth[a[1]].numpy()
-        # self.groundtruth[a[2]]=self.groundtruth[a[2]].numpy()
-        # import Utils
-        # Utils.save_keypoints(self.groundtruth, '/cvl/home/psxdm5/Projects/ExtendUnsupervisedLandmarks/data/CelebA/MaflGroundtruthLandmarks.pickle')
 
         #augmentations for first stage
         self.augmentations = iaa.Sequential([
@@ -197,23 +191,6 @@ class CelebA():
         if(keypoints is not None):
             augmentedkeypoints=self.keypointsToFANResolution(imagefile,keypoints_originalres,self.W,self.H)
 
-
-            # import matplotlib
-            # matplotlib.use('Agg')
-            # import matplotlib.pyplot as plt
-            # import matplotlib.gridspec as gridspec
-            # fig, ax = plt.subplots(1)
-            # ax.set_axis_off()
-            # ax.imshow(image)
-            # ax.scatter(augmentedkeypoints[:, 0], augmentedkeypoints[:, 1])
-            # # for j in range(len(groundtruthpoints)):
-            # #     ax.annotate(str(j), (groundtruthpoints[j, 0]-5, groundtruthpoints[j, 1]-5))
-            # # ax.scatter(np.array(bbox)[[0,2]], np.array(bbox)[[1,3]])
-            # plt.show()
-            # fig.savefig(f'foo.jpg')
-            # # fig.savefig(f'/home/SERILOCAL/d.mallis/Logs/test2/epoch15_{i}.jpg')
-            # import time
-            # time.sleep(1)
 
             return scaledImage,augmentedkeypoints
         

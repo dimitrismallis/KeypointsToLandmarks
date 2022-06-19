@@ -29,9 +29,6 @@ def test_stage1(FAN,config,log_path,metadata):
     
     keypoints=FAN.Get_labels_for_evaluation_firstStage(evaluation_dataloader)
 
-    # save_keypoints(keypoints,'/cvl/home/psxdm5/Projects/UnsupervisedLandmarks2/test.pickle')
-    # keypoints=load_keypoints('/cvl/home/psxdm5/Projects/UnsupervisedLandmarks2/test.pickle')
-
     ShowTestExamples(keypoints,log_path,config.experiment_name,config.K,config.dataset_name,metadata,imagefile_name=f'Test_Stage1.jpg')
 
     evaluator=evalCelebA.EvaluatorCelebA(config.experiment_name,log_path)
@@ -51,11 +48,7 @@ def test_stage2(FAN,config,log_path,metadata):
                                    number_of_channels=config.K)
 
     evaluation_dataloader = DataLoader(evaluation_database, batch_size=10, shuffle=False,num_workers=10, drop_last=False)
-    
-    # keypoints=FAN.Get_labels_for_evaluation_test(evaluation_dataloader)
 
-    # save_keypoints(keypoints,'/cvl/home/psxdm5/Projects/UnsupervisedLandmarks2/test.pickle')
-    # keypoints=load_keypoints('/cvl/home/psxdm5/Projects/UnsupervisedLandmarks2/test.pickle')
 
     ShowTestExamples(keypoints,log_path,config.experiment_name,config.K,config.dataset_name,metadata,imagefile_name=f'Test_Stage2.jpg')
 

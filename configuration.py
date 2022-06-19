@@ -45,7 +45,7 @@ class Configuration():
         hyperparameters.M=100
         hyperparameters.confidence_thres_FAN=0.15
         hyperparameters.nms_thres_FAN=2
-        hyperparameters.lr_step_schedual_stage1=[120000,160000]
+        hyperparameters.lr_step_schedual_stage1=[150000,180000]
 
         if(hyperparameters.dataset_name in ['CelebA']):    
             hyperparameters.nms_thres_superpoint=8

@@ -25,7 +25,7 @@ def test_stage1(FAN,config,log_path,metadata):
                                    function_for_dataloading=Database.get_FAN_evaluation,
                                    number_of_channels=config.K)
 
-    evaluation_dataloader = DataLoader(evaluation_database, batch_size=10, shuffle=False,num_workers=10, drop_last=False)
+    evaluation_dataloader = DataLoader(evaluation_database, batch_size=10, shuffle=False,num_workers=config.num_workers, drop_last=False)
     
     keypoints=FAN.Get_labels_for_evaluation_firstStage(evaluation_dataloader)
 
@@ -47,8 +47,10 @@ def test_stage2(FAN,config,log_path,metadata):
                                    function_for_dataloading=Database.get_FAN_evaluation,
                                    number_of_channels=config.K)
 
-    evaluation_dataloader = DataLoader(evaluation_database, batch_size=10, shuffle=False,num_workers=10, drop_last=False)
+    evaluation_dataloader = DataLoader(evaluation_database, batch_size=10, shuffle=False,num_workers=config.num_workers, drop_last=False)
 
+
+    keypoints=FAN.Get_labels_for_evaluation_SecondStage(evaluation_dataloader)
 
     ShowTestExamples(keypoints,log_path,config.experiment_name,config.K,config.dataset_name,metadata,imagefile_name=f'Test_Stage2.jpg')
 
@@ -75,7 +77,7 @@ if __name__=="__main__":
     metadata=paths['metadata']
 
 
-    stage=1
+    stage=config.eval_Stage
     initialize_log_dirs(config.experiment_name,log_path)
 
     path_to_checkpoint=config.path_to_checkpoint
@@ -113,7 +115,6 @@ if __name__=="__main__":
                         config.weight_decay,
                         config.K,
                         config.lr_step_schedual_stage2,
-                        config.roundIterations,
                         )
         if (path_to_checkpoint is None):
             path_to_checkpoint=GetPathsEval(config.experiment_name,log_path)

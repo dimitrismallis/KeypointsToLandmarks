@@ -53,10 +53,7 @@ class Database(Dataset):
 
         self.cutout=cutout(80, 0.5, True)
 
-        # try:
-        #     self.files=self.files[:2000]  
-        # except:
-        #     pass
+
 
         
 

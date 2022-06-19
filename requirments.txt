@@ -1,0 +1,14 @@
+scipy
+sklearn
+cvxpy
+imgaug @ git+https://github.com/aleju/imgaug.git
+matplotlib
+matrix-completion
+numpy
+opencv-python
+pandas
+PyYAML
+scikit-image
+scikit-learn
+tables
+torchfile

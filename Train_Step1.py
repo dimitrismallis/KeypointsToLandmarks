@@ -123,11 +123,6 @@ def train(config):
 
         FAN.Train_stage1(train_dataloader)
 
-        try:
-            evalModel(FAN,config,log_path,metadata)
-        except:
-            log_text("Eval Failed", config.experiment_name, log_path)
-
         keypoints,keypoints_val,_=FAN.Update_pseudoLabels(cluster_dataloader)
 
         ShowTrainExamples(keypoints_val,log_path,config.experiment_name,config.dataset_name,metadata,f'TrainIteration{FAN.iterations}.jpg')

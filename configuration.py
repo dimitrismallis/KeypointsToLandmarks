@@ -7,12 +7,13 @@ class Configuration():
         parser = argparse.ArgumentParser(description='Unsupervised Learning of Object Landmarks via Self-Training Correspondence')
         
 
-        parser.add_argument('--experiment_name', default='test',help='Please assign a unique name for each experiment. Use the same name for both training set 1 and 2.')
+        parser.add_argument('--experiment_name',help='Please assign a unique name for each experiment. Use the same name for both training set 1 and 2.',required=True)
         parser.add_argument('--dataset_name', choices=['CelebA'], default='CelebA',help='Select training dataset')
         parser.add_argument('--K', default=10 ,help='Select number of discovered landmarks K')
         parser.add_argument('--gpunum', default=1)
         parser.add_argument('--num_workers', default=0, help='Number of workers',type=int)
         parser.add_argument('--resume', action='store_true', help='If True stage 1 and 2 will resume form last saved checkpoint and pseudogroundtruth.')
+        parser.add_argument('--stage',default=1,help='Speficy the stage of the algorithm you want to evaluate on eval.py')
         parser.add_argument('--path_to_checkpoint',default=None)
 
 
@@ -28,6 +29,7 @@ class Configuration():
         hyperparameters.resume=args.resume
         hyperparameters.path_to_checkpoint=args.path_to_checkpoint
         hyperparameters.K=int(args.K)
+        hyperparameters.eval_Stage=int(args.stage)
 
         #params Whole Pipeline
         hyperparameters.lr=1e-4
@@ -41,6 +43,7 @@ class Configuration():
         hyperparameters.bootstrapping_iterations=30000
         hyperparameters.iterations_per_round=5000
         hyperparameters.total_iterations_stage1=200000
+        hyperparameters.total_iterations_stage2=200000
         hyperparameters.remove_superpoint_outliers_percentage=0.4
         hyperparameters.M=100
         hyperparameters.confidence_thres_FAN=0.15

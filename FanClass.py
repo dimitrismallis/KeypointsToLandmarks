@@ -50,12 +50,11 @@ class FAN_Model():
         self.model = torch.nn.DataParallel(self.model).cuda()
 
 
-    def init_secondstage(self,lr,weight_decay,K,lr_step_schedual_stage2,roundIterations,checkpoint_filename=None,flipppingCorrespondance=None):
+    def init_secondstage(self,lr,weight_decay,K,lr_step_schedual_stage2,checkpoint_filename=None,flipppingCorrespondance=None):
         self.iterations = 0
         self.weight_decay=weight_decay
         self.lr = lr
         self.lr_step_schedual_stage2=lr_step_schedual_stage2
-        self.roundIterations=roundIterations
         self.flipppingCorrespondance=flipppingCorrespondance
         if(checkpoint_filename is not None):
             log_text(f"Pretrained First Stage model loaded from  : {checkpoint_filename}", self.experiment_name,self.log_path)
@@ -287,8 +286,8 @@ class FAN_Model():
                     log_text('LR ' + str(self.optimizer.param_groups[0]['lr']),self.experiment_name,self.log_path)
 
 
-                if (self.iterations>0  and self.iterations%self.roundIterations==0):
-                    log_text(f"Round Completed, iteration {self.iterations}", self.experiment_name, self.log_path)
+                if (self.iterations>0  and 10000==0):
+                    log_text(f"Iteration {self.iterations}", self.experiment_name, self.log_path)
                     self.save_stage2()
                     return
 
@@ -477,6 +476,7 @@ class FAN_Model():
         I,centroids,_=KmeansClustering.cluster(clusteringDescriptors, centroids=centroids,verbose=False)
 
 
+
         flipppingCorrespondance_inference=np.zeros((self.K,self.K))
 
         Image_Keypoints_inference={}
@@ -639,7 +639,7 @@ class FAN_Model():
 
 
 
-    def Get_labels_for_evaluation_test(self,dataloader ,useflip=True):
+    def Get_labels_for_evaluation_SecondStage(self,dataloader ,useflip=True):
         log_text('Predictions for evaluation FAN',self.experiment_name,self.log_path)
         self.model.eval()
         

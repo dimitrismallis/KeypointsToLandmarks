@@ -8,7 +8,6 @@ from SuperPoint import SuperPoint
 from Database import Database
 from torch.utils.data import Dataset, DataLoader
 from FanClass import FAN_Model
-from Visualise import ShowExamples_Stage2
 from eval import test_stage2 as evalModel
 
 
@@ -77,7 +76,6 @@ def train(config):
                         config.weight_decay,
                         config.K,
                         config.lr_step_schedual_stage2,
-                        config.roundIterations,
                         path_to_checkpoint,
                         flipppingCorrespondance)
 
@@ -94,12 +92,11 @@ def train(config):
 
     log_text(f'Dataset Number of Images:{len(train_dataset.files)}', config.experiment_name, log_path) 
 
-    while FAN.iterations < config.lr_step_schedual_stage2:
+    while FAN.iterations < config.total_iterations_stage2:
 
         log_text(f'Training for iteration {FAN.iterations} begins', config.experiment_name, log_path) 
         FAN.Train_stage2(train_dataloader)
         
-        evalModel(FAN,config,log_path,metadata)
     
         FAN.iterations+=1
 

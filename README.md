@@ -58,7 +58,7 @@ path_to_superpoint_checkpoint: <pathToSuperPointCheckPoint>/superpoint_v1.pth
 
 ## Testing
 
-###Stage 1
+### Stage 1
 To evaluate the first stage of the algorithm execute:
 
 ```
@@ -67,7 +67,7 @@ python eval.py --experiment_name <experiment_name> --dataset_name <dataset_name>
 
 The last checkpoint stored on _Results/\<experiment\_name\>/CheckPoints/_  will be loaded automatically. TO you want to evaluate a particular checkpoint or pretrained model use the `path_to_checkpoint` argument.
 
-###Stage 2
+### Stage 2
 
 Similarly, to To evaluate the second stage of the algorithm execute:
 

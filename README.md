@@ -38,10 +38,11 @@ conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
 conda install -c pytorch faiss-gpu cudatoolkit=10.2
 ```
 
-Install other external dependencies using pip.
+Install other external dependencies using pip and create the results directory.
 
 ```
 pip install -r requirements.txt 
+mkdir Results
 ```
 
 

@@ -1,7 +1,9 @@
 # From Keypoints to Object Landmarks via Self-Training Correspondence: A novel approach to Unsupervised Landmark Discovery
 ### Dimitrios Mallis, Enrique Sanchez, Matt Bell, Georgios Tzimiropoulos
 
-This repository contains the training and evaluation code for ["From Keypoints to Object Landmarks via Self-Training Correspondence: A novel approach to Unsupervised Landmark Discovery"](https://arxiv.org/abs/2205.15895). This sofware learns a deep landmark detector, directly from raw images of a specific object category, without requiring any manual annotations.
+This repository contains the training and evaluation code for paper ["From Keypoints to Object Landmarks via Self-Training Correspondence: A novel approach to Unsupervised Landmark Discovery"](https://arxiv.org/abs/2205.15895). This sofware learns a deep landmark detector, directly from raw images of a specific object category, without requiring any manual annotations.
+
+#### _This work was accepted for publication in TPAMI. Early access [here](https://ieeexplore.ieee.org/document/10005822)!!_
 
 #### _Dataloader and pretrained models for more databases will be released soon!!_
 
@@ -118,11 +120,13 @@ We provide also pretrained models. Can be used to execute the testing script and
 If you found this work useful consider citing:
 
 ```
-@article{Mallis2022FromKT,
-  title={From Keypoints to Object Landmarks via Self-Training Correspondence: A novel approach to Unsupervised Landmark Discovery},
-  author={Dimitrios Mallis and Enrique Sanchez and Matt Bell and Georgios Tzimiropoulos},
-  journal={ArXiv},
-  year={2022},
-  volume={abs/2205.15895}
-}
+@ARTICLE{10005822,
+  author={Mallis, Dimitrios and Sanchez, Enrique and Bell, Matt and Tzimiropoulos, Georgios},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={From Keypoints to Object Landmarks via Self-Training Correspondence: A novel approach to Unsupervised Landmark Discovery}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-15},
+  doi={10.1109/TPAMI.2023.3234212}}
 ```

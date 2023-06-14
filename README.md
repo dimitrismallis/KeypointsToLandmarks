@@ -3,7 +3,7 @@
 
 This repository contains the training and evaluation code for paper ["From Keypoints to Object Landmarks via Self-Training Correspondence: A novel approach to Unsupervised Landmark Discovery"](https://arxiv.org/abs/2205.15895). This sofware learns a deep landmark detector, directly from raw images of a specific object category, without requiring any manual annotations.
 
-#### _This work was accepted for publication in TPAMI. Early access [here](https://ieeexplore.ieee.org/document/10005822)!!_
+#### _This work was accepted for publication in [TPAMI](https://ieeexplore.ieee.org/document/10005822)!!_
 
 #### _Dataloader and pretrained models for more databases will be released soon!!_
 
@@ -123,10 +123,10 @@ If you found this work useful consider citing:
 @ARTICLE{10005822,
   author={Mallis, Dimitrios and Sanchez, Enrique and Bell, Matt and Tzimiropoulos, Georgios},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
-  title={From Keypoints to Object Landmarks via Self-Training Correspondence: A novel approach to Unsupervised Landmark Discovery}, 
+  title={From Keypoints to Object Landmarks via Self-Training Correspondence: A Novel Approach to Unsupervised Landmark Discovery}, 
   year={2023},
-  volume={},
-  number={},
-  pages={1-15},
+  volume={45},
+  number={7},
+  pages={8390-8404},
   doi={10.1109/TPAMI.2023.3234212}}
 ```

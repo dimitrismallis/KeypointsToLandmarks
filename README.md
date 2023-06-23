@@ -109,12 +109,12 @@ where _\< dataset\_name \>_ is in ``"CelebA","LS3D"`` and _\< experiment\_name \
 
 We provide also pretrained models. Can be used to execute the testing script and produce visual results.
 
-| Dataset       |K |Stage |Model        
-| ---------|----- |:---:| --------------- |
-| _CelebA_ | 10   |1 |   [link](https://drive.google.com/file/d/15Ez9YpgXWVf_-BjVICFdLoGkPjW5a5tV/view?usp=sharing) | 
-| _CelebA_| 10 | 2 |   [link](https://drive.google.com/file/d/121NtZ_B8O1MwD25o5rLK0Ini_I8S12CY/view?usp=sharing) | 
-| _CelebA_| 30   |1 |   [link](https://drive.google.com/file/d/1h3Z55uClTKwFAM0y1DF3jO56KOf7VzJ8/view?usp=share_link) | 
-| _CelebA_| 30 | 2 |   [link](https://drive.google.com/file/d/11PazzSC1CWjQ-R8B-VZP-pTytv0IIZJh/view?usp=sharing) | |
+| Dataset       |K |Stage |Model        | Dataset       |K |Stage |Model        |
+| ---------|----- |:---:| --------------- | ---------|----- |:---:| --------------- |
+| _CelebA_ | 10   |1 |   [link](https://drive.google.com/file/d/15Ez9YpgXWVf_-BjVICFdLoGkPjW5a5tV/view?usp=sharing) | _LS3D_ | 10   | 1 |   
+| _CelebA_| 10 | 2 |   [link](https://drive.google.com/file/d/121NtZ_B8O1MwD25o5rLK0Ini_I8S12CY/view?usp=sharing) | _LS3D_| 10 | 2 |    | 
+| _CelebA_| 30   |1 |   [link](https://drive.google.com/file/d/1h3Z55uClTKwFAM0y1DF3jO56KOf7VzJ8/view?usp=share_link) | _LS3D_ | 30   | 1 |   [link](https://drive.google.com/file/d/1Hq8toW88eEssJZtnrtsmPG7NXjILHg_R/view?usp=sharing)
+| _CelebA_| 30 | 2 |   [link](https://drive.google.com/file/d/11PazzSC1CWjQ-R8B-VZP-pTytv0IIZJh/view?usp=sharing) | _LS3D_ | 30   | 2 |   [link](https://drive.google.com/file/d/1ffSB76I_UmIMolJp333Y9VVpIJITFtLD/view?usp=sharing)
 
 
 

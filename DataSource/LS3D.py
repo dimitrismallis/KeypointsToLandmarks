@@ -62,7 +62,6 @@ class LS3D():
         if (self.test):
 
             assert self.path_to_LS3Dbalanced!=None, "Path missing!! Update 'LS3Dbalanced_datapath' on paths/main.yaml with path to LS3Dbalanced images."
-            print('split the test set for having the same distribution')
             self.getbox=self.getbox_fromlandmarks_ls3d_eval
             testfiles = glob.glob(self.path_to_LS3Dbalanced + '/**/*.jpg', recursive=True)
             trainfiles= list(self.boxes.keys())

@@ -5,9 +5,6 @@ This repository contains the training and evaluation code for paper ["From Keypo
 
 #### _This work was accepted for publication in [TPAMI](https://ieeexplore.ieee.org/document/10005822)!!_
 
-#### _Dataloader and pretrained models for more databases will be released soon!!_
-
-
 
 ![alt text](images/pipeline.png "Method Description")
 
@@ -21,6 +18,9 @@ This repository contains the training and evaluation code for paper ["From Keypo
 CelebA can be found [here](https://www.robots.ox.ac.uk/~vgg/research/unsupervised_landmarks/resources/celeba.zip). Download the .zip file inside an empty directory and unzip. We provide precomputed bounding boxes and 68-point annotations (for evaluation only) in _data/CelebA_.
 
 
+### LS3D
+We use [300W-LP](https://drive.google.com/file/d/0B7OEHD3T4eCkVGs0TkhUWFN6N1k/view?usp=sharing) database for training and [LS3D-balanced](https://www.adrianbulat.com/downloads/FaceAlignment/LS3D-W-balanced-20-03-2017.zip) for evaluation. Download the files in 2 seperate empty directories and unzip. We provide precomputed bounding boxes for 300W-LP in _data/LS3D_.
+
 
 ## Installation
 
@@ -29,15 +29,15 @@ You require a reasonable CUDA capable GPU. This project was developed using Linu
 Create a new conda environment and activate it:
 
 ```
-conda create -n KeypToLandEnv python=3.8
+conda create -n KeypToLandEnv python=3.10
 conda activate KeypToLandEnv
 ```
 
 Install [pythorch](https://pytorch.org/) and the [faiss library]((https://github.com/facebookresearch/faiss) ):
 
 ```
-conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
-conda install -c pytorch faiss-gpu cudatoolkit=10.2
+conda install pytorch torchvision pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install faiss-gpu pytorch pytorch-cuda -c pytorch -c nvidia (check if i can do this with a single command)
 ```
 
 Install other external dependencies using pip and create the results directory.
@@ -55,6 +55,8 @@ Before code execution you have to update `paths/main.yaml` so it includes all th
 
 ```
 CelebA_datapath: <pathToCelebA_database>/celeb/Img/img_align_celeba_hq/
+300WLP_datapath: <pathTo300WLP_database>/300W_LP/
+LS3Dbalanced_datapath: <pathToLS3Dbalanced_database>/new_dataset/
 path_to_superpoint_checkpoint: <pathToSuperPointCheckPoint>/superpoint_v1.pth
 ```
 
@@ -68,7 +70,7 @@ To evaluate the first stage of the algorithm execute:
 python eval.py --experiment_name <experiment_name> --dataset_name <dataset_name>  --K <K> --stage 1
 ```
 
-The last checkpoint stored on ```_Results/\<experiment\_name\>/CheckPoints/_```  will be loaded automatically. TO you want to evaluate a particular checkpoint or pretrained model use the `path_to_checkpoint` argument.
+The last checkpoint stored on ```_Results/<experiment_name>/CheckPoints/_```  will be loaded automatically. To you want to evaluate a particular checkpoint or pretrained model use the `path_to_checkpoint` argument.
 
 ### Stage 2
 
@@ -78,7 +80,7 @@ Similarly, to To evaluate the second stage of the algorithm execute:
 python eval.py --experiment_name <experiment_name> --dataset_name <dataset_name>  --K <K> --stage 2
 ```
 
-Cumulative forward and backward error curves will be stored in ```_Results/\<experiment\_name\>/Logs/_``` .
+Cumulative forward and backward error curves will be stored in ```_Results/<experiment_name>/Logs/_``` .
 
 
 
@@ -99,7 +101,7 @@ Similarly, to execute the second step please run:
 python Train_Step2.py --dataset_name <dataset_name> --experiment_name <experiment_name> --K <K>
 ```
 
-where _\< dataset\_name \>_ is in ``"CelebA"`` and _\< experiment\_name \>_ is a custom name you choose for each experiment. Please use the **same experiment name for both the first and second step**. The software will automatically initiate the second step with the groundtruth descovered in step one.
+where _\< dataset\_name \>_ is in ``"CelebA","LS3D"`` and _\< experiment\_name \>_ is a custom name you choose for each experiment. Please use the **same experiment name for both the first and second step**. The software will automatically initiate the second step with the groundtruth discovered in step one.
 
 
 
@@ -107,7 +109,7 @@ where _\< dataset\_name \>_ is in ``"CelebA"`` and _\< experiment\_name \>_ is a
 
 We provide also pretrained models. Can be used to execute the testing script and produce visual results.
 
-| Model       |K |Stage |Model        
+| Dataset       |K |Stage |Model        
 | ---------|----- |:---:| --------------- |
 | _CelebA_ | 10   |1 |   [link](https://drive.google.com/file/d/15Ez9YpgXWVf_-BjVICFdLoGkPjW5a5tV/view?usp=sharing) | 
 | _CelebA_| 10 | 2 |   [link](https://drive.google.com/file/d/121NtZ_B8O1MwD25o5rLK0Ini_I8S12CY/view?usp=sharing) | 

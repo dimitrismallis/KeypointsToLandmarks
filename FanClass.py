@@ -50,10 +50,11 @@ class FAN_Model():
         self.model = torch.nn.DataParallel(self.model).cuda()
 
 
-    def init_secondstage(self,lr,weight_decay,K,lr_step_schedual_stage2,checkpoint_filename=None,flipppingCorrespondance=None):
+    def init_secondstage(self,lr,weight_decay,K,lr_step_schedual_stage2, save_checkpoint_frequency, checkpoint_filename=None,flipppingCorrespondance=None):
         self.iterations = 0
         self.weight_decay=weight_decay
         self.lr = lr
+        self.save_checkpoint_frequency = save_checkpoint_frequency
         self.lr_step_schedual_stage2=lr_step_schedual_stage2
         self.flipppingCorrespondance=flipppingCorrespondance
         if(checkpoint_filename is not None):
@@ -281,12 +282,12 @@ class FAN_Model():
         while(True):
             for i_batch, sample in enumerate(dataloader):
                 
-                if (self.iterations>0  and self.iterations in self.lr_step_schedual_stage2):
+                if (self.iterations > 0  and self.iterations in self.lr_step_schedual_stage2):
                     self.schedualer.step()
                     log_text('LR ' + str(self.optimizer.param_groups[0]['lr']),self.experiment_name,self.log_path)
 
 
-                if (self.iterations>0  and 10000==0):
+                if (self.iterations > 0  and self.iterations % self.save_checkpoint_frequency == 0):
                     log_text(f"Iteration {self.iterations}", self.experiment_name, self.log_path)
                     self.save_stage2()
                     return
@@ -307,8 +308,8 @@ class FAN_Model():
                 self.optimizer.step()
                 self.iterations += 1
                 
-                if(self.iterations%50==0):
-                    log_text(f"Stats, Iteration:{self.iterations} Loss:{loss.item()}, max:{torch.max(predictions)}", self.experiment_name, self.log_path)
+                if(self.iterations%1000==0):
+                    log_text(f"Iteration:{self.iterations} Loss:{loss.item()}", self.experiment_name, self.log_path)
 
 
     def Update_pseudoLabels(self,dataloader):

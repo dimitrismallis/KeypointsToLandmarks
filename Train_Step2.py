@@ -76,6 +76,7 @@ def train(config):
                         config.weight_decay,
                         config.K,
                         config.lr_step_schedual_stage2,
+                        config.save_checkpoint_frequency,
                         path_to_checkpoint,
                         flipppingCorrespondance)
 

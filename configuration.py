@@ -8,7 +8,7 @@ class Configuration():
         
 
         parser.add_argument('--experiment_name',help='Please assign a unique name for each experiment. Use the same name for both training set 1 and 2.',required=True)
-        parser.add_argument('--dataset_name', choices=['CelebA'], default='CelebA',help='Select training dataset')
+        parser.add_argument('--dataset_name', choices=['CelebA','LS3D'], default='CelebA',help='Select training dataset')
         parser.add_argument('--K', default=10 ,help='Select number of discovered landmarks K')
         parser.add_argument('--gpunum', default=1)
         parser.add_argument('--num_workers', default=0, help='Number of workers',type=int)
@@ -43,20 +43,20 @@ class Configuration():
         hyperparameters.bootstrapping_iterations=30000
         hyperparameters.iterations_per_round=5000
         hyperparameters.total_iterations_stage1=200000
-        hyperparameters.total_iterations_stage2=200000
         hyperparameters.remove_superpoint_outliers_percentage=0.4
         hyperparameters.M=100
         hyperparameters.confidence_thres_FAN=0.15
         hyperparameters.nms_thres_FAN=2
         hyperparameters.lr_step_schedual_stage1=[150000,180000]
 
-        if(hyperparameters.dataset_name in ['CelebA']):    
-            hyperparameters.nms_thres_superpoint=8
+
+        hyperparameters.nms_thres_superpoint=8
         
 
         #params Stage 2
         hyperparameters.lr_step_schedual_stage2=[50000,70000]      
-        hyperparameters.total_iterations_stage2=100000
+        hyperparameters.total_iterations_stage2=200000
+        hyperparameters.save_checkpoint_frequency=20000
 
 
         #scale for different number of gpus

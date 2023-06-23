@@ -7,6 +7,7 @@ import cv2
 import random
 import itertools
 from DataSource.CelebA import CelebA
+from DataSource.LS3D import LS3D
 
 
 class Database(Dataset):
@@ -33,6 +34,8 @@ class Database(Dataset):
 
         if(dataset_name =='CelebA'):
             self.Datasource=CelebA(self.test,self.metadata)
+        if(dataset_name =='LS3D'):
+            self.Datasource=LS3D(self.test,self.metadata)
         
         if (self.image_keypoints is not None):
             self.files = list(self.image_keypoints.keys())

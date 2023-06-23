@@ -1,4 +1,5 @@
 from Evaluators.evalCelebA import EvaluatorCelebA
+from Evaluators.evalLS3D import EvaluatorLS3D
 from torch.utils.data import Dataset, DataLoader
 import torch
 import torch.nn as nn
@@ -31,7 +32,8 @@ def test_stage1(FAN,config,log_path,metadata):
 
     ShowTestExamples(keypoints,log_path,config.experiment_name,config.K,config.dataset_name,metadata,imagefile_name=f'Test_Stage1.jpg')
 
-    evaluator=evalCelebA.EvaluatorCelebA(config.experiment_name,log_path)
+    if(config.dataset_name == "CelebA"): evaluator =EvaluatorCelebA(config.experiment_name,log_path)
+    if(config.dataset_name == "LS3D"): evaluator = EvaluatorLS3D(config.experiment_name,log_path)
     evaluator.Evaluate_Stage1(keypoints,config.K,evaluation_dataloader)
 
 
@@ -54,7 +56,8 @@ def test_stage2(FAN,config,log_path,metadata):
 
     ShowTestExamples(keypoints,log_path,config.experiment_name,config.K,config.dataset_name,metadata,imagefile_name=f'Test_Stage2.jpg')
 
-    evaluator=evalCelebA.EvaluatorCelebA(config.experiment_name,log_path)
+    if(config.dataset_name == "CelebA"): evaluator =EvaluatorCelebA(config.experiment_name,log_path)
+    if(config.dataset_name == "LS3D"): evaluator = EvaluatorLS3D(config.experiment_name,log_path)
     evaluator.Evaluate_Stage2(keypoints,config.K,evaluation_dataloader)
 
 
@@ -115,6 +118,7 @@ if __name__=="__main__":
                         config.weight_decay,
                         config.K,
                         config.lr_step_schedual_stage2,
+                        config.save_checkpoint_frequency
                         )
         if (path_to_checkpoint is None):
             path_to_checkpoint=GetPathsEval(config.experiment_name,log_path)

@@ -1,5 +1,4 @@
 scipy
-sklearn
 cvxpy
 imgaug @ git+https://github.com/aleju/imgaug.git
 matplotlib

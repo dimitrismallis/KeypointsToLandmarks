@@ -37,7 +37,7 @@ Install [pythorch](https://pytorch.org/) and the [faiss library]((https://github
 
 ```
 conda install pytorch torchvision pytorch-cuda=11.7 -c pytorch -c nvidia
-conda install faiss-gpu pytorch pytorch-cuda -c pytorch -c nvidia (check if i can do this with a single command)
+conda install faiss-gpu pytorch pytorch-cuda -c pytorch -c nvidia
 ```
 
 Install other external dependencies using pip and create the results directory.

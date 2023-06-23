@@ -1,4 +1,6 @@
 CelebA_datapath: <pathToCelebA_database>/celeb/Img/img_align_celeba_hq/
+300WLP_datapath: <pathTo300WLP_database>/300W_LP/
+LS3Dbalanced_datapath: <pathToLS3Dbalanced_database>/new_dataset/
 path_to_superpoint_checkpoint: <pathToSuperPointCheckPoint>/superpoint_v1.pth
 log_path: Results/
 metadata: data/
